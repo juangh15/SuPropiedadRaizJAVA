@@ -32,13 +32,12 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
         setMessages(request);
         HttpSession session = request.getSession();
-        List<Cliente> clientes = new ArrayList<Cliente>();
-        if (null != session.getAttribute("Clientes")) {
-            clientes = (ArrayList<Cliente>) session.getAttribute("Clientes");
-        }
+        
         Cliente c= (Cliente)session.getAttribute("logeado");
+        Propietario p=(Propietario)session.getAttribute("propietario");
         request.setAttribute("logeado", c);
-        request.setAttribute("Clientes", clientes);
+        request.setAttribute("propietario", p);
+        
         RequestDispatcher view = request.getRequestDispatcher("login.jsp");
         view.forward(request, response);
     }
@@ -67,13 +66,16 @@ public class login extends HttpServlet {
              }
         
          }
-        for(Propietario c: propietarios){
+        if(logeado==null){
+            for(Propietario c: propietarios){
              if(c.getCedula()== cc && c.getContrasena().equals(pass)){
                  propietario= c;
                  break;
              }
         
          }
+        }
+        
         session.setAttribute("logeado", logeado);
         request.setAttribute("logeado", logeado);
         session.setAttribute("propietario", propietario);

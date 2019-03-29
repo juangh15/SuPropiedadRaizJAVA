@@ -9,7 +9,7 @@ import static controllers.MainServlet.setMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,32 +18,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Cliente;
-import util.Ficticios;
+import models.Inmueble;
+import models.Propietario;
 
 /**
  *
  * @author Tamayo
  */
-@WebServlet(name = "logout", urlPatterns = {"/logout"})
-public class logout extends HttpServlet {
+@WebServlet(name = "verInmueblesPropietario", urlPatterns = {"/verInmueblesPropietario"})
+public class verInmueblesPropietario extends HttpServlet {
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         setMessages(request);
-        
-        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-        view.forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        setMessages(request);
-        session.setAttribute("logeado", null);
-        session.setAttribute("propietario", null);
-        RequestDispatcher view = request.getRequestDispatcher("login.jsp");
+        HttpSession session = request.getSession();    
+        Propietario p= (Propietario)session.getAttribute("propietario");
+        if(p==null){
+            RequestDispatcher view = request.getRequestDispatcher("/index");
+            view.forward(request, response);
+        }
+        LinkedList<Inmueble> inmuebles = new LinkedList<Inmueble>();      
+        inmuebles=p.getInmuebles();
+        request.setAttribute("propietario", p);
+        request.setAttribute("Inmuebles", inmuebles);  
+        RequestDispatcher view = request.getRequestDispatcher("verInmuebles.jsp");
         view.forward(request, response);
     }
 }

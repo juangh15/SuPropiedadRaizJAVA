@@ -35,13 +35,10 @@ public class verInmuebles extends HttpServlet {
         if(null != session.getAttribute("Inmuebles")){
             inmuebles=(ArrayList<Inmueble>) session.getAttribute("Inmuebles");
         }
-        Cliente c=null;
-        if(null!= session.getAttribute("logeado")){
-            c= (Cliente)session.getAttribute("logeado");
-        } 
-        
-        
+        Cliente c= (Cliente)session.getAttribute("logeado");
+        Propietario p=(Propietario)session.getAttribute("propietario");
         request.setAttribute("logeado", c);
+        request.setAttribute("propietario", p);
         request.setAttribute("Inmuebles", inmuebles);  
         RequestDispatcher view = request.getRequestDispatcher("verInmuebles.jsp");
         view.forward(request, response);

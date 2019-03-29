@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.Cliente;
+import models.*;
 
 /**
  *
@@ -35,11 +35,10 @@ public class verClientes extends HttpServlet {
         if(null != session.getAttribute("Clientes")){
             clientes=(ArrayList<Cliente>) session.getAttribute("Clientes");
         }
-        Cliente c=null;
-        if(null!= session.getAttribute("logeado")){
-            c= (Cliente)session.getAttribute("logeado");
-        }        
+        Cliente c= (Cliente)session.getAttribute("logeado");
+        Propietario p=(Propietario)session.getAttribute("propietario");
         request.setAttribute("logeado", c);
+        request.setAttribute("propietario", p);
         request.setAttribute("Clientes", clientes);   
         RequestDispatcher view = request.getRequestDispatcher("verClientes.jsp");
         view.forward(request, response);

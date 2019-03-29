@@ -1,7 +1,9 @@
 package controllers;
 
 import static controllers.MainServlet.setMessages;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.*;
+import org.apache.commons.io.IOUtils;
 import util.Ficticios;
 
 /**
@@ -30,13 +33,10 @@ public class index extends HttpServlet {
             throws ServletException, IOException {
         setMessages(request);
         HttpSession session = request.getSession();
-        List<Cliente> clientes = new ArrayList<Cliente>();
-        if (null != session.getAttribute("Clientes")) {
-            clientes = (ArrayList<Cliente>) session.getAttribute("Clientes");
-        }
-        Cliente c = (Cliente) session.getAttribute("logeado");
+        Cliente c= (Cliente)session.getAttribute("logeado");
+        Propietario p=(Propietario)session.getAttribute("propietario");
         request.setAttribute("logeado", c);
-        request.setAttribute("Clientes", clientes);
+        request.setAttribute("propietario", p);
         RequestDispatcher view = request.getRequestDispatcher("index.jsp");
         view.forward(request, response);
     }
@@ -69,17 +69,10 @@ public class index extends HttpServlet {
                 Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if(accion.equals("agregar clientes desde txt")){
-            try {
-                String rutaRelativaApp= getServletContext().getRealPath("/");
-                System.out.println("rutaaaa"+rutaRelativaApp);
-                Ficticios.datos_desde_txt(clientes);
+            InputStream input=getServletContext().getResourceAsStream("ficticios.txt");
+                String result=IOUtils.toString(input,"UTF-8");
+                System.out.println(result);
                 
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-                RequestDispatcher view = request.getRequestDispatcher("nuevoCliente.jsp");
-                view.forward(request, response);
-                Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         
         session.setAttribute("Propietarios", propietarios);

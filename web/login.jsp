@@ -31,6 +31,18 @@
 
     </h3>
 </c:if >
+<c:if test="${!empty propietario}">
+    <h3>
+        Bienvenido propietario: 
+        ${propietario.getNombre()}
+        <form method="POST" action="./logout">
+            <br />
+            <div class="form-group row" >
+                <input  type="submit" class="btn btn-dark" value="Cerrar sesion" name="accion" />
+            </div>
+        </form>
 
+    </h3>
+</c:if >
 
 <%@ include file="footer.jsp" %>

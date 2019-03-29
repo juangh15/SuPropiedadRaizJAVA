@@ -28,7 +28,9 @@ public class Messages {
             put("area","Area total");
             put("banos","Numero banos");
             put("cuartos","Numero cuartos");
-            put("ciudad","ciudad");  
+            put("ciudad","Ciudad");  
+            put("tipo","Tipo");
+            put("lista_inmuebles_propietario","Mis inmuebles registrados");
         }
     };
 }

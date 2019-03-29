@@ -23,10 +23,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./login">Login</a>
                     </li>
+                    
+                    <c:if test="${empty logeado and empty propietario}">
                     <li class="nav-item">
                         <a class="nav-link" href="./nuevoCliente">Nuevo cliente <span class="sr-only">(current)</span></a>
                     </li>
-                    <c:if test="${!empty logeado}">
+                    
 
                         <li class="nav-item">
                             <a class="nav-link" href="#">Nuevo propietario</a>
@@ -36,10 +38,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./verClientes">Ver Clientes</a>
                     </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="./verInmuebles">Ver Inmuebles</a>
+                    <c:if test="${!empty logeado}">
+                        
+                        <li class="nav-item">
+                        <a class="nav-link" href="./verInmuebles">Ver inmuebles disponibles</a>
                     </li>
+                    </c:if>
+                    
+                    <c:if test="${!empty propietario}">
+                        
+                        <li class="nav-item">
+                        <a class="nav-link" href="./verInmueblesPropietario">Ver mis inmuebles</a>
+                    </li>
+                    </c:if>
+                    
                 </ul>
             </div>
         </nav>

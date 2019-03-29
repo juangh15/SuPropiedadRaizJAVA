@@ -1,6 +1,11 @@
 <%@ include file="header.jsp" %>
-
-<h3>${messages["lista_inmuebles"]}</h3>
+<c:if test="${!empty propietario}">
+    <h3>${messages["lista_inmuebles_propietario"]}</h3>
+</c:if>
+<c:if test="${empty propietario}">
+    <h3>${messages["lista_inmuebles"]}</h3>
+</c:if>
+    
 <c:if test="${!empty Inmuebles}">
     <table class="table table-bordered table-dark"
     <thead class="thead-dark">
@@ -11,6 +16,7 @@
         <th scope="col">${messages["banos"]}</th>
         <th scope="col">${messages["cuartos"]}</th>
         <th scope="col">${messages["ciudad"]}</th>
+        <th scope="col">${messages["tipo"]}</th>
     </tr>
         </thead>
     <c:forEach items="${Inmuebles}" var="inmu">
@@ -21,6 +27,7 @@
             <td>${inmu.getBanos()}</td>
             <td>${inmu.getCuartos()}</td>
             <td>${inmu.getCiudad()}</td>
+            <td>${inmu.getTipo()}</td>
         </tr>
     </c:forEach>
     </table>

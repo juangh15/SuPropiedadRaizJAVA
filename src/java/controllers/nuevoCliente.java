@@ -33,8 +33,6 @@ public class nuevoCliente extends MainServlet {
         if(null != session.getAttribute("Clientes")){
             clientes=(ArrayList<Cliente>) session.getAttribute("Clientes");
         }
-        Cliente c= (Cliente)session.getAttribute("logeado");
-        request.setAttribute("logeado", c);
         request.setAttribute("Clientes", clientes);   
         RequestDispatcher view = request.getRequestDispatcher("nuevoCliente.jsp");
         view.forward(request, response);
