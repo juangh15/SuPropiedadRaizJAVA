@@ -28,6 +28,7 @@
             <td>${inmu.getCuartos()}</td>
             <td>${inmu.getCiudad()}</td>
             <td>${inmu.getTipo()}</td>
+            <td><a href="./infoInmueble?predial=${inmu.getPredial()}">ver mas</td>
         </tr>
     </c:forEach>
     </table>
