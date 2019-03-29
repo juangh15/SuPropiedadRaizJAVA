@@ -69,9 +69,9 @@ public class index extends HttpServlet {
                 Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if(accion.equals("agregar clientes desde txt")){
-            InputStream input=getServletContext().getResourceAsStream("ficticios.txt");
-                String result=IOUtils.toString(input,"UTF-8");
-                System.out.println(result);
+            InputStream input=getServletContext().getResourceAsStream("/ficticios.txt");
+            String result = IOUtils.toString(input,"UTF-8");
+            Ficticios.datos_desde_txt(clientes, result);
                 
         }
         
