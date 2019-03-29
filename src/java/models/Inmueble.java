@@ -2,6 +2,7 @@ package models;
 import java.util.LinkedList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 public class Inmueble {
     
@@ -13,14 +14,14 @@ public class Inmueble {
     private int banos;
     private int cuartos;
     private String tipo;
-    private LinkedList arriendo = new LinkedList<>();
+    private LinkedList<Arriendo> arriendo;
     private Compraventa compraventa;
     private Propietario propietario;
     private String ciudad;
     private int antiguedad;
     private boolean disponible;
 
-    public Inmueble(int predial, int estrato, boolean vigilancia, boolean ascensor, int area, int banos, int cuartos, String tipo, LinkedList arriendo, Compraventa compraventa, Propietario propietario, String ciudad, int antiguedad, boolean disponible) {
+    public Inmueble(int predial, int estrato, boolean vigilancia, boolean ascensor, int area, int banos, int cuartos, String tipo, Compraventa compraventa, Propietario propietario, String ciudad, int antiguedad, boolean disponible) {
         this.predial = predial;
         this.estrato = estrato;
         this.vigilancia = vigilancia;
@@ -29,7 +30,7 @@ public class Inmueble {
         this.banos = banos;
         this.cuartos = cuartos;
         this.tipo = tipo;
-        this.arriendo = arriendo;
+        this.arriendo = new LinkedList<Arriendo>();
         this.compraventa = compraventa;
         this.propietario = propietario;
         this.ciudad = ciudad;
@@ -192,6 +193,15 @@ public class Inmueble {
             return null;
         }
         return inmuebles_encontrados;
+    }
+    
+    public static Inmueble buscarPorPredial(List<Inmueble> inmuebles, int predial){
+        for (Inmueble iterado : inmuebles) {
+            if(iterado.getPredial()==predial){
+                return iterado;
+            }
+        }
+        return null;
     }
 
     public LinkedList buscarInmueblesEnCompraventa(LinkedList<Inmueble> todos_inmuebles) {
