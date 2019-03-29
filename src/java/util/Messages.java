@@ -31,6 +31,7 @@ public class Messages {
             put("ciudad","Ciudad");  
             put("tipo","Tipo");
             put("lista_inmuebles_propietario","Mis inmuebles registrados");
+            put("inmueble_actual","Datos del inmueble: ");
         }
     };
 }
