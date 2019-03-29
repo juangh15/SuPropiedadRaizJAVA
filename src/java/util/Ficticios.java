@@ -54,11 +54,12 @@ public class Ficticios {
         p = new Propietario(cc, nombre, correo, contrasena, direccion);
         propietarios.add(p);
         prediales += 1;
-        inmu=new Inmueble(prediales, 3, true, true, 20, 3, 4, "enVenta", null, null, p, "Medellin", 12, true);
+        inmu=new Inmueble(prediales, 3, true, true, 20, 3, 4, "enVenta", null, p, "Medellin", 12, true);
         p.addInmueble(inmu);
         Date fecha = formatter.parse("01/11/2018");
         Date fecha_fin;
-        Compraventa compra= new Compraventa(codigo_contrato, fecha, 200000, inmu, true, "efectivo",p);        
+        Compraventa compra= new Compraventa(codigo_contrato, fecha, 200000, inmu, true, "efectivo",p);  
+        inmu.setCompraventa(compra);
         propietarios.add(p);
         inmuebles.add(inmu);
         contratos.add(compra);        
@@ -73,10 +74,11 @@ public class Ficticios {
             p = new Propietario(cc, nombre, correo, contrasena, direccion);
             propietarios.add(p);
             prediales += 1;
-            inmu=new Inmueble(prediales,i+1, true, true, 40+i, 3, 4, "enVenta", null, null, p, "Medellin", 12, true);
+            inmu=new Inmueble(prediales,i+1, true, true, 40+i, 3, 4, "enVenta", null, p, "Medellin", 12, true);
             p.addInmueble(inmu);
             fecha = formatter.parse("01/11/2018");
             compra= new Compraventa(codigo_contrato, fecha, 200000, inmu, true, "efectivo",p);
+            inmu.setCompraventa(compra);
             propietarios.add(p);
             inmuebles.add(inmu);
             contratos.add(compra);
@@ -93,11 +95,12 @@ public class Ficticios {
             p = new Propietario(cc, nombre, correo, contrasena, direccion);
             propietarios.add(p);
             prediales += 1;
-            inmu=new Inmueble(prediales,i+1, true, true, 40+i, 3, 4, "enVenta", null, null, p, "Medellin", 12, true);
+            inmu=new Inmueble(prediales,i+1, true, true, 40+i, 3, 4, "enArriendo", null, p, "Medellin", 12, true);
             p.addInmueble(inmu);
             fecha = formatter.parse("01/11/2018");
             fecha_fin= formatter.parse("01/11/2020");
             arri= new Arriendo(codigo_contrato, fecha, 100000, inmu, true, "efectivo", "No", fecha_fin, p);
+            inmu.getArriendo().addLast(arri);
             propietarios.add(p);
             inmuebles.add(inmu);
             contratos.add(arri);                    
@@ -106,11 +109,9 @@ public class Ficticios {
     }
     
     //Clientes desde txt
-    public static void datos_desde_txt(ArrayList<Cliente> clientes) throws Exception{
-        String nombre_txt = "\\build\\web\\WEB-INF\\ficticios.txt"; //este es el nombre del archivo, cambiarlo segun haya txt de clientes
+    public static void datos_desde_txt(ArrayList<Cliente> clientes, String todos){
         
-        java.io.File archivo = new java.io.File(nombre_txt);  //abre
-        java.util.Scanner input = new Scanner(new java.io.FileReader(archivo));
+        java.util.Scanner input = new Scanner(todos);
         String siguiente, nombre="", correo="", contrasena="", direccion="";
         int cedula=0;
         while(input.hasNext()){
@@ -136,7 +137,6 @@ public class Ficticios {
                 clientes.add(c1);
             }
         }
-        input.close();
     }
     
 }
