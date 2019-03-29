@@ -161,7 +161,7 @@ public class Inmueble {
         ??
     }*/
 
-    public LinkedList verInmueblesDisponibles(LinkedList<Inmueble> todos_inmuebles) {
+    public static LinkedList verInmueblesDisponibles(LinkedList<Inmueble> todos_inmuebles) {
         Iterator<Inmueble> i;
         Inmueble actual;
         LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
@@ -178,7 +178,7 @@ public class Inmueble {
         return inmuebles_encontrados;
     }
 
-    public LinkedList buscarInmueblesEnArriendo(LinkedList<Inmueble> todos_inmuebles) {
+    public static LinkedList buscarInmueblesEnArriendo(LinkedList<Inmueble> todos_inmuebles) {
         Iterator<Inmueble> i;
         Inmueble actual;
         LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
@@ -204,7 +204,7 @@ public class Inmueble {
         return null;
     }
 
-    public LinkedList buscarInmueblesEnCompraventa(LinkedList<Inmueble> todos_inmuebles) {
+    public static LinkedList buscarInmueblesEnCompraventa(LinkedList<Inmueble> todos_inmuebles) {
         Iterator<Inmueble> i;
         Inmueble actual;
         LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();

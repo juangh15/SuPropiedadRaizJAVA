@@ -9,6 +9,7 @@ import static controllers.MainServlet.setMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,9 +32,9 @@ public class verInmuebles extends HttpServlet {
             throws ServletException, IOException {
         setMessages(request);
         HttpSession session = request.getSession();        
-        ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();      
+        LinkedList<Inmueble> inmuebles = new LinkedList<Inmueble>();      
         if(null != session.getAttribute("Inmuebles")){
-            inmuebles=(ArrayList<Inmueble>) session.getAttribute("Inmuebles");
+            inmuebles=(LinkedList<Inmueble>) session.getAttribute("Inmuebles");
         }
         Cliente c= (Cliente)session.getAttribute("logeado");
         Propietario p=(Propietario)session.getAttribute("propietario");
@@ -44,13 +45,4 @@ public class verInmuebles extends HttpServlet {
         view.forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        setMessages(request);
-        
-        RequestDispatcher view = request.getRequestDispatcher("verInmuebles.jsp");
-        view.forward(request, response);
-    }
 }

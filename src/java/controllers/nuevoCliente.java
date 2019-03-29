@@ -8,6 +8,7 @@ package controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,9 +30,9 @@ public class nuevoCliente extends MainServlet {
             throws ServletException, IOException {
         setMessages(request);
         HttpSession session = request.getSession();        
-        List<Cliente> clientes = new ArrayList<Cliente>();        
+        LinkedList<Cliente> clientes = new LinkedList<Cliente>();        
         if(null != session.getAttribute("Clientes")){
-            clientes=(ArrayList<Cliente>) session.getAttribute("Clientes");
+            clientes=(LinkedList<Cliente>) session.getAttribute("Clientes");
         }
         request.setAttribute("Clientes", clientes);   
         RequestDispatcher view = request.getRequestDispatcher("nuevoCliente.jsp");

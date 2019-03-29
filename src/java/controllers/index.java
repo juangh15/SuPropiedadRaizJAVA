@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,18 +46,18 @@ public class index extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-        ArrayList<Propietario> propietarios = new ArrayList<Propietario>();
-        ArrayList<Inmueble> inmuebles = new ArrayList<Inmueble>();
-        ArrayList<Contrato> contratos = new ArrayList<Contrato>();
+        LinkedList<Cliente> clientes = new LinkedList<Cliente>();
+        LinkedList<Propietario> propietarios = new LinkedList<Propietario>();
+        LinkedList<Inmueble> inmuebles = new LinkedList<Inmueble>();
+        LinkedList<Contrato> contratos = new LinkedList<Contrato>();
         if (null != session.getAttribute("propietarios")) {
-            propietarios = (ArrayList<Propietario>) session.getAttribute("Propietarios");
-            inmuebles = (ArrayList<Inmueble>) session.getAttribute("Inmuebles");
-            contratos = (ArrayList<Contrato>) session.getAttribute("Contratos");
+            propietarios = (LinkedList<Propietario>) session.getAttribute("Propietarios");
+            inmuebles = (LinkedList<Inmueble>) session.getAttribute("Inmuebles");
+            contratos = (LinkedList<Contrato>) session.getAttribute("Contratos");
         }
         if (null != session.getAttribute("Clientes")) {
             
-            clientes = (ArrayList<Cliente>) session.getAttribute("Clientes");
+            clientes = (LinkedList<Cliente>) session.getAttribute("Clientes");
         }
         Cliente c = (Cliente) session.getAttribute("logeado");
         String accion=request.getParameter("ficticios");

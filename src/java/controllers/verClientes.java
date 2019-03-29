@@ -9,6 +9,7 @@ import static controllers.MainServlet.setMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,9 +32,9 @@ public class verClientes extends HttpServlet {
             throws ServletException, IOException {
         setMessages(request);
         HttpSession session = request.getSession();        
-        List<Cliente> clientes = new ArrayList<Cliente>();        
+        LinkedList<Cliente> clientes = new LinkedList<Cliente>();        
         if(null != session.getAttribute("Clientes")){
-            clientes=(ArrayList<Cliente>) session.getAttribute("Clientes");
+            clientes=(LinkedList<Cliente>) session.getAttribute("Clientes");
         }
         Cliente c= (Cliente)session.getAttribute("logeado");
         Propietario p=(Propietario)session.getAttribute("propietario");
@@ -49,9 +50,9 @@ public class verClientes extends HttpServlet {
             throws ServletException, IOException {  
         //setMessages(request);
         HttpSession session = request.getSession();        
-        List<Cliente> clientes = new ArrayList<Cliente>();
+        LinkedList<Cliente> clientes = new LinkedList<Cliente>();
         if(null != session.getAttribute("Clientes")){
-            clientes=(ArrayList<Cliente>) session.getAttribute("Clientes");
+            clientes=(LinkedList<Cliente>) session.getAttribute("Clientes");
         }        
         
         session.setAttribute("Clientes", clientes);

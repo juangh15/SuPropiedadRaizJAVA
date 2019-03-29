@@ -9,6 +9,7 @@ import static controllers.MainServlet.setMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,13 +48,13 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
         setMessages(request);
         HttpSession session = request.getSession();
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-        ArrayList<Propietario> propietarios = new ArrayList<Propietario>();
+        LinkedList<Cliente> clientes = new LinkedList<Cliente>();
+        LinkedList<Propietario> propietarios = new LinkedList<Propietario>();
         if (null != session.getAttribute("Clientes")) {
-            clientes = (ArrayList<Cliente>) session.getAttribute("Clientes");
+            clientes = (LinkedList<Cliente>) session.getAttribute("Clientes");
         }
         if (null != session.getAttribute("Propietarios")) {
-            propietarios = (ArrayList<Propietario>) session.getAttribute("Propietarios");
+            propietarios = (LinkedList<Propietario>) session.getAttribute("Propietarios");
         }
         int cc = Integer.parseInt(request.getParameter("cedula"));
         String pass = request.getParameter("contrasena");

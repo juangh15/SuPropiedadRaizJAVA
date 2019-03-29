@@ -19,7 +19,7 @@ public class Ficticios {
         "Grigalva"};
     
 
-    public static void agregarClientes(ArrayList<Cliente> clientes) {
+    public static void agregarClientes(LinkedList<Cliente> clientes) {
         Cliente c;
         String nombre = "prueba";
         String correo = "@Prueba";
@@ -40,7 +40,7 @@ public class Ficticios {
         }
     }
     
-    public static void agregarPropietarios(ArrayList<Propietario> propietarios,ArrayList<Inmueble> inmuebles,ArrayList<Contrato> contratos) throws ParseException{
+    public static void agregarPropietarios(LinkedList<Propietario> propietarios,LinkedList<Inmueble> inmuebles,LinkedList<Contrato> contratos) throws ParseException{
         Propietario p;
         Inmueble inmu;
         Arriendo arri;
@@ -109,7 +109,7 @@ public class Ficticios {
     }
     
     //Clientes desde txt
-    public static void datos_desde_txt(ArrayList<Cliente> clientes, String todos){
+    public static void datos_desde_txt(LinkedList<Cliente> clientes, String todos){
         
         java.util.Scanner input = new Scanner(todos);
         String siguiente, nombre="", correo="", contrasena="", direccion="";
