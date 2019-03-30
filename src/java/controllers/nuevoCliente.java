@@ -44,9 +44,9 @@ public class nuevoCliente extends MainServlet {
             throws ServletException, IOException {  
         setMessages(request);
         HttpSession session = request.getSession();        
-        List<Cliente> clientes = new ArrayList<Cliente>();
+        LinkedList<Cliente> clientes = new LinkedList<Cliente>();
         if(null != session.getAttribute("Clientes")){
-            clientes=(ArrayList<Cliente>) session.getAttribute("Clientes");
+            clientes=(LinkedList<Cliente>) session.getAttribute("Clientes");
         }
         int cc = Integer.parseInt(request.getParameter("cedula"));
         String nombre = request.getParameter("nombre"); 
