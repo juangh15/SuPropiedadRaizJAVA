@@ -1,5 +1,5 @@
 <%@ include file="header.jsp" %>
-
+<h3>${messages["nuevo_cliente"]}</h3>
 <form method="POST" action="./nuevoCliente">
     <br /><br />
     <div class="form-group row" >

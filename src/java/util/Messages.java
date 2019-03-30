@@ -5,7 +5,6 @@
  */
 package util;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -26,12 +25,20 @@ public class Messages {
             put("predial","Predial");
             put("estrato","Estrato");
             put("area","Area total");
-            put("banos","Numero banos");
+            put("banos","Numero de banos");
             put("cuartos","Numero cuartos");
             put("ciudad","Ciudad");  
             put("tipo","Tipo");
+            put("venta","Para la venta");
+            put("arriendo","Para Arrendar");
+            put("antiguedad","Anos de antiguedad");
+            put("vigilancia","Tiene vigilacia?");
+            put("ascensor","Tiene ascensor?");
             put("lista_inmuebles_propietario","Mis inmuebles registrados");
             put("inmueble_actual","Datos del inmueble: ");
+            put("nuevo_cliente","Creacion de nuevo usuario");
+            put("nuevo_propietario","Crecaion de nuevo propietario");
+            put("nuevo_inmueble","Registro de inmueble a ofrecer");
         }
     };
 }

@@ -1,12 +1,6 @@
 <%@ include file="header.jsp" %>
-<c:if test="${!empty propietario}">
-    <h3>${messages["lista_inmuebles_propietario"]}</h3>
-</c:if>
 
-
-<c:if test="${empty propietario}">
     <h3>${messages["inmueble_actual"]}</h3>
-</c:if>
 
 <c:if test="${!empty inmueble_actual}">
     <table class="table table-bordered table-dark"

@@ -33,7 +33,7 @@
                     
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Nuevo propietario</a>
+                            <a class="nav-link" href="./nuevoPropietario">Nuevo propietario</a>
                         </li>
                     </c:if>
 
@@ -51,6 +51,9 @@
                         
                         <li class="nav-item">
                         <a class="nav-link" href="./verInmueblesPropietario">Ver mis inmuebles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./nuevoInmueble">Registrar nuevo inmueble </a>
                     </li>
                     </c:if>
                     

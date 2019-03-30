@@ -50,7 +50,7 @@ public class index extends HttpServlet {
         LinkedList<Propietario> propietarios = new LinkedList<Propietario>();
         LinkedList<Inmueble> inmuebles = new LinkedList<Inmueble>();
         LinkedList<Contrato> contratos = new LinkedList<Contrato>();
-        if (null != session.getAttribute("propietarios")) {
+        if (null != session.getAttribute("Propietarios")) {
             propietarios = (LinkedList<Propietario>) session.getAttribute("Propietarios");
             inmuebles = (LinkedList<Inmueble>) session.getAttribute("Inmuebles");
             contratos = (LinkedList<Contrato>) session.getAttribute("Contratos");

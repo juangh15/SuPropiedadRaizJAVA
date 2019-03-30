@@ -5,11 +5,10 @@
  */
 package controllers;
 
+import static controllers.MainServlet.setMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,18 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.*;
+
 /**
  *
  * @author Tamayo
  */
-@WebServlet(name = "nuevoCliente", urlPatterns = {"/nuevoCliente"})
-public class nuevoCliente extends MainServlet {
+@WebServlet(name = "nuevoPropietario", urlPatterns = {"/nuevoPropietario"})
+public class nuevoPropietario extends HttpServlet {
 
-    @Override
+   
+     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         setMessages(request);   
-        RequestDispatcher view = request.getRequestDispatcher("nuevoCliente.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("nuevoPropietario.jsp");
         view.forward(request, response);
     }
 
@@ -38,24 +39,22 @@ public class nuevoCliente extends MainServlet {
             throws ServletException, IOException {  
         setMessages(request);
         HttpSession session = request.getSession();        
-        LinkedList<Cliente> clientes = new LinkedList<Cliente>();
-        if(null != session.getAttribute("Clientes")){
-            clientes=(LinkedList<Cliente>) session.getAttribute("Clientes");
+        LinkedList<Propietario> propietarios = new LinkedList<Propietario>();
+        if(null != session.getAttribute("Propietarios")){
+            propietarios=(LinkedList<Propietario>) session.getAttribute("Propietarios");
         }
         int cc = Integer.parseInt(request.getParameter("cedula"));
         String nombre = request.getParameter("nombre"); 
         String correo = request.getParameter("correo"); 
         String pass= request.getParameter("contrasena");
         String direccion= request.getParameter("direccion");
-        Cliente c= new Cliente(cc, nombre, correo,  pass, direccion);
+        Propietario p= new Propietario(cc, nombre, correo,  pass, direccion);
         
-        clientes.add(c);
+        propietarios.add(p);
         
-        session.setAttribute("Clientes", clientes);
-        request.setAttribute("Clientes", clientes);        
-        RequestDispatcher view = request.getRequestDispatcher("nuevoCliente.jsp");
+        session.setAttribute("Propietarios", propietarios);      
+        RequestDispatcher view = request.getRequestDispatcher("nuevoPropietario.jsp");
         view.forward(request, response);
     }
-    
-    
+
 }
