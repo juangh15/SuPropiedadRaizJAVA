@@ -62,7 +62,8 @@ public class Ficticios {
         inmu.setCompraventa(compra);
         propietarios.add(p);
         inmuebles.add(inmu);
-        contratos.add(compra);        
+        contratos.add(compra); 
+        p.addContrato(compra);
         //Inmuebles en venta
         for(i=0;i<5;i++){
             nombre = nombres[(int) (Math.floor(Math.random() * ((nombres.length - 1) - 0 + 1) + 0))] + " "
@@ -79,6 +80,7 @@ public class Ficticios {
             fecha = formatter.parse("01/11/2018");
             compra= new Compraventa(codigo_contrato, fecha, 200000, inmu, true, "efectivo",p);
             inmu.setCompraventa(compra);
+            p.addContrato(compra);
             propietarios.add(p);
             inmuebles.add(inmu);
             contratos.add(compra);
@@ -102,6 +104,7 @@ public class Ficticios {
             arri= new Arriendo(codigo_contrato, fecha, 100000, inmu, true, "efectivo", "No", fecha_fin, p);
             inmu.getArriendo().addLast(arri);
             propietarios.add(p);
+            p.addContrato(arri);
             inmuebles.add(inmu);
             contratos.add(arri);                    
             codigo_contrato+=1;
