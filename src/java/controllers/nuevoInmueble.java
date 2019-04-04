@@ -8,6 +8,7 @@ package controllers;
 import static controllers.MainServlet.setMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,39 +29,74 @@ public class nuevoInmueble extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        setMessages(request);   
+        setMessages(request);
+        HttpSession session = request.getSession();
+        Propietario p = (Propietario) session.getAttribute("propietario");
+        
+        request.setAttribute("propietario", p);
         RequestDispatcher view = request.getRequestDispatcher("nuevoInmueble.jsp");
         view.forward(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         setMessages(request);
         HttpSession session = request.getSession();
-        Propietario p= (Propietario)session.getAttribute("propietario");
-        
-        if(p==null){
-            RequestDispatcher view = request.getRequestDispatcher("/index");
-        view.forward(request, response);
+        Propietario p = (Propietario) session.getAttribute("propietario");
+        String boton = request.getParameter("boton");
+
+        LinkedList inmuebles = (LinkedList<Inmueble>) session.getAttribute("Inmuebles");
+        if (boton.equals("Guardar contrato")) {
+            int codigo = Contrato.codigo_nuevo + 1;
+            Contrato.codigo_nuevo += 1;
+            Date fecha = new Date();
+            int valor = Integer.parseInt(request.getParameter("valor"));
+            Inmueble actual = (Inmueble) session.getAttribute("inmueble_actual");
+            boolean disponible = Boolean.parseBoolean(request.getParameter("disponible"));
+            if (actual.getTipo().equals("enVenta")) {
+                String medio_pago = request.getParameter("medio_pago");
+                Compraventa comven = new Compraventa(codigo, fecha, valor, actual, disponible, medio_pago, p);
+                p.addContrato(comven);
+                actual.setCompraventa(comven);
+
+            } else {
+                String agencia = request.getParameter("agencia");
+                String medio_pago = request.getParameter("tipo_pago");
+                Arriendo arri = new Arriendo(codigo, fecha, valor, actual, disponible, medio_pago, agencia, null, p);
+                p.addContrato(arri);
+                actual.addArriendo(arri);
+            }
+            request.setAttribute("propietario", p);
+            RequestDispatcher view = request.getRequestDispatcher("nuevoInmueble.jsp");
+            view.forward(request, response);
         }
-        LinkedList inmuebles=(LinkedList<Inmueble>) session.getAttribute("Inmuebles");
         int predial = Integer.parseInt(request.getParameter("predial"));
         int estrato = Integer.parseInt(request.getParameter("estrato"));
-        boolean vigilancia = Boolean.parseBoolean(request.getParameter("vigilancia")); 
-        boolean ascensor = Boolean.parseBoolean(request.getParameter("ascensor")); 
+        boolean vigilancia = Boolean.parseBoolean(request.getParameter("vigilancia"));
+        boolean ascensor = Boolean.parseBoolean(request.getParameter("ascensor"));
         int area = Integer.parseInt(request.getParameter("area"));
         int banos = Integer.parseInt(request.getParameter("banos"));
-        String tipo= request.getParameter("tipo");
         int antiguedad = Integer.parseInt(request.getParameter("antiguedad"));
         int cuartos = Integer.parseInt(request.getParameter("cuartos"));
-        String ciudad =request.getParameter("ciudad");
-        Inmueble inmu=new Inmueble(predial, estrato, vigilancia, ascensor, area, banos, cuartos, tipo, null, p, ciudad, antiguedad, true);
+        String ciudad = request.getParameter("ciudad");
+        String tipo;
+        if (boton.equals("Poner en venta")) {
+            tipo = "enVenta";
+        } else {
+            tipo = "enArriendo";
+        }
+        Inmueble inmu = new Inmueble(predial, estrato, vigilancia, ascensor, area, banos, cuartos, tipo, null, p, ciudad, antiguedad, true);
         p.addInmueble(inmu);
         inmuebles.add(inmu);
-        request.setAttribute("Inmuebles", inmuebles);
+
+        session.setAttribute("Inmuebles", inmuebles);
         request.setAttribute("propietario", p);
-        RequestDispatcher view = request.getRequestDispatcher("nuevoInmueble.jsp");
+        request.setAttribute("inmueble_actual", inmu);
+        session.setAttribute("inmueble_actual", inmu);
+        request.setAttribute("tipo_contrato", boton);
+
+        RequestDispatcher view = request.getRequestDispatcher("nuevoContrato.jsp");
         view.forward(request, response);
     }
 }

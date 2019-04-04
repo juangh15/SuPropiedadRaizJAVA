@@ -9,6 +9,7 @@ public class Propietario {
     private String contrasena;
     private String direccion;
     private LinkedList<Inmueble> inmuebles;
+    private LinkedList<Contrato> contratos;
 
     public Propietario(int cedula, String nombre, String correo, String contrasena, String direccion) {
         this.cedula = cedula;
@@ -17,6 +18,7 @@ public class Propietario {
         this.contrasena = contrasena;
         this.direccion = direccion;
         this.inmuebles = new LinkedList<>();
+        this.contratos = new LinkedList<>();
     }
 
     
@@ -79,7 +81,17 @@ public class Propietario {
     public void addInmueble(Inmueble i1){
         this.getInmuebles().add(i1);
     }
-    
+
+    public LinkedList<Contrato> getContratos() {
+        return contratos;
+    }
+
+    public void setContratos(LinkedList<Contrato> contratos) {
+        this.contratos = contratos;
+    }
+    public void addContrato(Contrato c){
+        this.contratos.add(c);
+    }
     public static Propietario login(int cedula, String contrasena, HashMap<Integer, Propietario> propietarios) {
         if (propietarios.containsKey(cedula)) {
             Propietario temporal = propietarios.get(cedula);

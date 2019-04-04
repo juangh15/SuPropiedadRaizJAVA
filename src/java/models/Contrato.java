@@ -9,6 +9,7 @@ public class Contrato {
     private double valor;
     private Inmueble inmueble;
     private boolean disponible;
+    public static int codigo_nuevo=999;
     public Contrato(int codigo,Date fecha,double valor,Inmueble inmueble,boolean disponible,Propietario propietario){
         this.codigo=codigo;
         this.fecha=fecha;

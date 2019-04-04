@@ -86,7 +86,7 @@
 
     <c:if test="${!empty propietario}">
         <h3>Opciones de contrato:</h3>
-        <form method="POST" action="./editarContrato">
+        <form method="GET" action="./editarContrato">
             <br />
             <input type="text" name="editar_contrato" hidden="true" value="editar contrato" class="form-control"/>
             <div class="form-group row" >

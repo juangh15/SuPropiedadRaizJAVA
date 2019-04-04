@@ -50,15 +50,7 @@
             <input type="text" name="cuartos" required="true" class="form-control"/><br /><br />
         </div>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">${messages["tipo"]}: </label>
-        <div class="col-sm-4">
-            <select class="custom-select" name='tipo' >
-                <option value=enVenta>${messages["venta"]}</option>
-                <option value=enArriendo>${messages["arriendo"]}</option>
-            </select>
-        </div>
-    </div>
+    
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">${messages["ciudad"]}*: </label>
         <div class="col-sm-2">
@@ -71,7 +63,7 @@
             <input type="text" name="antiguedad" required="true" class="form-control"/><br /><br />
         </div>
     </div>
-    <input type="submit" class="btn btn-dark" value="Guardar" />
+    <input type="submit" class="btn btn-dark" value="Poner en venta" name="boton" />   <input type="submit" class="btn btn-dark" value="Poner en arriendo" name="boton" />
 
 </form>
 
