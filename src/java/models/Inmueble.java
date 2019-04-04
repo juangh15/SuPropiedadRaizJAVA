@@ -157,9 +157,24 @@ public class Inmueble {
         this.disponible = disponible;
     }
 
-    /*public LinkedList verListaInmuebles(LinkedList<Inmueble> todos_inmuebles) {
-        ??
-    }*/
+    public boolean addArriendo(Arriendo a1) {
+        if (this.getCompraventa() == null) {
+            this.getArriendo().add(a1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean addCompraventa(Compraventa c1) {
+        if (this.getCompraventa() == null) {
+            this.setCompraventa(c1);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public static LinkedList verInmueblesDisponibles(LinkedList<Inmueble> todos_inmuebles) {
         Iterator<Inmueble> i;
@@ -178,26 +193,9 @@ public class Inmueble {
         return inmuebles_encontrados;
     }
 
-    public static LinkedList buscarInmueblesEnArriendo(LinkedList<Inmueble> todos_inmuebles) {
-        Iterator<Inmueble> i;
-        Inmueble actual;
-        LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
-        i = todos_inmuebles.listIterator();
-        while (i.hasNext()) {
-            actual = i.next();
-            if (actual.getTipo().equalsIgnoreCase("enArriendo")) {
-                inmuebles_encontrados.add(actual);
-            }
-        }
-        if (inmuebles_encontrados.isEmpty()) {
-            return null;
-        }
-        return inmuebles_encontrados;
-    }
-    
-    public static Inmueble buscarPorPredial(List<Inmueble> inmuebles, int predial){
+    public static Inmueble buscarPorPredial(List<Inmueble> inmuebles, int predial) {
         for (Inmueble iterado : inmuebles) {
-            if(iterado.getPredial()==predial){
+            if (iterado.getPredial() == predial) {
                 return iterado;
             }
         }
@@ -205,14 +203,11 @@ public class Inmueble {
     }
 
     public static LinkedList buscarInmueblesEnCompraventa(LinkedList<Inmueble> todos_inmuebles) {
-        Iterator<Inmueble> i;
-        Inmueble actual;
         LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
-        i = todos_inmuebles.listIterator();
-        while (i.hasNext()) {
-            actual = i.next();
-            if (actual.getTipo().equalsIgnoreCase("enVenta")) {
-                inmuebles_encontrados.add(actual);
+        for (Inmueble iterado : todos_inmuebles) {
+
+            if (iterado.getTipo().equalsIgnoreCase("enVenta")) {
+                inmuebles_encontrados.add(iterado);
             }
         }
         if (inmuebles_encontrados.isEmpty()) {
@@ -221,21 +216,98 @@ public class Inmueble {
         return inmuebles_encontrados;
     }
 
-    public boolean addArriendo(Arriendo a1) {
-        if (this.getCompraventa() == null) {
-            this.getArriendo().add(a1);
-            return true;
-        } else {
-            return false;
+    public static LinkedList buscarInmueblesEnArriendo(LinkedList<Inmueble> todos_inmuebles) {
+        LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
+        for (Inmueble iterado : todos_inmuebles) {
+
+            if (iterado.getTipo().equalsIgnoreCase("enArriendo")) {
+                inmuebles_encontrados.add(iterado);
+            }
         }
+        if (inmuebles_encontrados.isEmpty()) {
+            return null;
+        }
+        return inmuebles_encontrados;
     }
 
-    public boolean addCompraventa(Compraventa c1) {
-        if (this.getCompraventa() == null) {
-            this.setCompraventa(c1);
-            return true;
-        } else {
-            return false;
+    ////busquedaaaaaaaas
+    //por ciudad
+    public static LinkedList buscarPorCiudad(LinkedList<Inmueble> todos_inmuebles, String ciudad) {
+        LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
+        for (Inmueble iterado : todos_inmuebles) {
+            if (iterado.getCiudad().equalsIgnoreCase(ciudad)) {
+                inmuebles_encontrados.add(iterado);
+            }
         }
+        if (inmuebles_encontrados.isEmpty()) {
+            return null;
+        }
+        return inmuebles_encontrados;
     }
+
+    //por estrato
+    public static LinkedList buscarPorEstrato(LinkedList<Inmueble> todos_inmuebles, int estrato) {
+        LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
+        for (Inmueble iterado : todos_inmuebles) {
+            if (iterado.getEstrato() == estrato) {
+                inmuebles_encontrados.add(iterado);
+            }
+        }
+        if (inmuebles_encontrados.isEmpty()) {
+            return null;
+        }
+        return inmuebles_encontrados;
+    }
+
+    //por numero de banos
+    public static LinkedList buscarPorNumeroDeBanos(LinkedList<Inmueble> todos_inmuebles, int banosini, int banostop) {
+        LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
+        int bano;
+        for (Inmueble iterado : todos_inmuebles) {
+            bano = iterado.getBanos();
+            if ((bano >= banosini) && (bano <= banostop)) {
+                inmuebles_encontrados.add(iterado);
+            }
+        }
+        if (inmuebles_encontrados.isEmpty()) {
+            return null;
+        }
+        return inmuebles_encontrados;
+    }
+
+    //por numero de cuartos
+    public static LinkedList buscarPorNumeroDeCuartos(LinkedList<Inmueble> todos_inmuebles, int cuartosini, int cuartostop) {
+        LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<>();
+        int c;
+        for (Inmueble iterado : todos_inmuebles) {
+            c = iterado.getCuartos();
+
+            if ((c <= cuartostop) && (c >= cuartosini)) {
+                inmuebles_encontrados.add(iterado);
+            }
+        }
+        if (inmuebles_encontrados.isEmpty()) {
+            return null;
+        }
+        return inmuebles_encontrados;
+    }
+
+    //por area
+    public static LinkedList<Inmueble> buscarPorArea(LinkedList<Inmueble> todos_inmuebles, int areaini, int areatop) {
+        LinkedList<Inmueble> inmuebles_encontrados = new LinkedList<Inmueble>();
+        int area;
+        for (Inmueble iterado : todos_inmuebles) {
+            area = iterado.getArea();
+
+            if ((area <= areatop) && (area >= areaini)) {
+                inmuebles_encontrados.add(iterado);
+            }
+        }
+        if (inmuebles_encontrados.isEmpty()) {
+            return null;
+        }
+        return inmuebles_encontrados;
+
+    }
+
 }
