@@ -5,13 +5,19 @@
  */
 package controllers;
 
+import static controllers.MainServlet.setMessages;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import models.Cliente;
+import models.Inmueble;
+import models.Propietario;
 
 /**
  *
@@ -40,7 +46,9 @@ public class AplicarContrato extends HttpServlet {
             out.println("<title>Servlet AplicarContrato</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AplicarContrato at " + request.getContextPath() + "</h1>");
+            out.println("<h1> A aplicado correctamente al inmueble: "
+                    + "" + getInmuebleTomado((LinkedList<Inmueble>)request.getAttribute("Inmuebles"),
+                    Integer.parseInt(request.getParameter("predial"))) + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,6 +66,27 @@ public class AplicarContrato extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+          setMessages(request);
+        HttpSession session = request.getSession();        
+        LinkedList<Inmueble> inmuebles = null;      
+        if(null != session.getAttribute("Inmuebles")){
+            inmuebles=(LinkedList<Inmueble>) session.getAttribute("Inmuebles");
+        }
+        Propietario p= (Propietario)session.getAttribute("propietario");
+        Cliente c=(Cliente)session.getAttribute("logeado");
+        
+       
+        Integer predial=Integer.parseInt(request.getParameter("predial"));
+        for (Inmueble i : inmuebles) {
+            if(i.getPredial()==predial){
+                i.setDisponible(false);
+        }
+        }
+           
+        request.setAttribute("propietario", p); 
+        request.setAttribute("logeado", c);
+        request.setAttribute("Inmuebles", inmuebles);
         processRequest(request, response);
     }
 
@@ -72,17 +101,19 @@ public class AplicarContrato extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+       
     }
+    
+    private String getInmuebleTomado (LinkedList<Inmueble> inmuebles, Integer predial){
+        String pred ="";
+           for (Inmueble i : inmuebles) {
+            if(i.getPredial()==predial){
+                pred= predial.toString();
+        }
+    }
+           return pred;
+    }
+      
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-}
+   }

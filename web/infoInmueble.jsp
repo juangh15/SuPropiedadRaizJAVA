@@ -112,9 +112,12 @@
         <h3>¿Desea aplicar a este inmueble?</h3>
         <form method="POST" action="./aplicarContrato">
             <br />
+            
+            
             <input type="text" name="aplicar_contrato" hidden="true" value="aplicar contrato" class="form-control"/>
             <div class="form-group row" >
-                <input type="submit" class="btn btn-primary" value="Aplicar" name="accion" />
+                <!--<input type="submit" class="btn btn-primary" value="Aplicar" name="accion" />-->
+                <a class="btn btn-primary" href="./aplicarContrato?predial=${inmueble_actual.getPredial()}">Aplicar</a>
             </div>
 
         </form>
