@@ -25,13 +25,13 @@ import util.ValidadorDeFormularios;
 @WebServlet(name = "nuevoPropietario", urlPatterns = {"/nuevoPropietario"})
 public class nuevoPropietario extends HttpServlet {
 
-   
+   private RequestDispatcher view =null;
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         setMessages(request);   
-        RequestDispatcher view = request.getRequestDispatcher("nuevoPropietario.jsp");
-        view.forward(request, response);
+        this.view = request.getRequestDispatcher("nuevoPropietario.jsp");
+        this.view .forward(request, response);
     }
 
     @Override
@@ -39,33 +39,40 @@ public class nuevoPropietario extends HttpServlet {
             throws ServletException, IOException {  
         setMessages(request);
         HttpSession session = request.getSession();        
-        LinkedList<Propietario> propietarios = new LinkedList<Propietario>();
+        LinkedList<Propietario> propietarios = null;
         if(null != session.getAttribute("Propietarios")){
             propietarios=(LinkedList<Propietario>) session.getAttribute("Propietarios");
         }
           if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("cedula"))) {
-            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            this.view = request.getRequestDispatcher("camposNoValidos.jsp");
             session.setAttribute("error", "El campo Cédula, debe de ser un número entero");
             session.setAttribute("urlAnterior",request.getRequestURI());
-             view.forward(request, response);
+             this.view .forward(request, response);
         }
          if (!ValidadorDeFormularios.esCorreoValido(request.getParameter("correo"))) {
-            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            this.view  = request.getRequestDispatcher("camposNoValidos.jsp");
             session.setAttribute("error", "El campo Correo, debe tener un formato válido");
-             view.forward(request, response);
+             this.view .forward(request, response);
         }
-        int cc = Integer.parseInt(request.getParameter("cedula"));
+        Integer cc = Integer.parseInt(request.getParameter("cedula"));
         String nombre = request.getParameter("nombre"); 
         String correo = request.getParameter("correo"); 
         String pass= request.getParameter("contrasena");
         String direccion= request.getParameter("direccion");
+        
+         if (ValidadorDeFormularios.existePropietario(propietarios,cc)) {
+            this.view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El Propietario con cédula numer: "+cc.toString()+" ya existe");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             this.view.forward(request, response);
+         }
         Propietario p= new Propietario(cc, nombre, correo,  pass, direccion);
         
         propietarios.add(p);
         
         session.setAttribute("Propietarios", propietarios);      
-        RequestDispatcher view = request.getRequestDispatcher("nuevoPropietario.jsp");
-        view.forward(request, response);
+        this.view = request.getRequestDispatcher("nuevoPropietario.jsp");
+        this.view.forward(request, response);
     }
 
 }

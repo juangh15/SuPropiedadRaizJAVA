@@ -34,7 +34,7 @@ public class Propietario {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(Integer cedula) {
         this.cedula = cedula;
     }
 
@@ -43,7 +43,7 @@ public class Propietario {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     public String getCorreo() {
@@ -51,7 +51,7 @@ public class Propietario {
     }
 
     public void setCorreo(String correo) {
-        this.correo = correo;
+        this.correo = correo.trim();
     }
 
     public String getContrasena() {
@@ -59,7 +59,7 @@ public class Propietario {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        this.contrasena = contrasena.trim();
     }
 
     public String getDireccion() {
@@ -67,7 +67,7 @@ public class Propietario {
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        this.direccion = direccion.trim();
     }
 
     public LinkedList getInmuebles() {

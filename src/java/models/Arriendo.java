@@ -35,7 +35,7 @@ public class Arriendo extends Contrato{
     }
 
     public void setAgencia(String agencia) {
-        this.agencia = agencia;
+        this.agencia = agencia.trim();
     }
 
     public Date getFechafin() {

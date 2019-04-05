@@ -36,7 +36,7 @@ public class Compraventa extends Contrato {
     }
 
     public void setMedioPago(String medioPago) {
-        this.medioPago = medioPago;
+        this.medioPago = medioPago.trim();
     }
 
     public static LinkedList compraventasDisponibles(HashMap<Integer, Compraventa> compraventas) {

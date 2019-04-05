@@ -47,7 +47,7 @@ public class Inmueble {
         return predial;
     }
 
-    public void setPredial(int predial) {
+    public void setPredial(Integer predial) {
         this.predial = predial;
     }
     
@@ -57,7 +57,7 @@ public class Inmueble {
         return estrato;
     }
 
-    public void setEstrato(int estrato) {
+    public void setEstrato(Integer estrato) {
         this.estrato = estrato;
     }
 
@@ -106,7 +106,7 @@ public class Inmueble {
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.tipo = tipo.trim();
     }
 
     public LinkedList getArriendo() {
@@ -138,7 +138,7 @@ public class Inmueble {
     }
 
     public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+        this.ciudad = ciudad.trim();
     }
 
     public int getAntiguedad() {
