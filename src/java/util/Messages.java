@@ -37,8 +37,9 @@ public class Messages {
             put("lista_inmuebles_propietario","Mis inmuebles registrados");
             put("inmueble_actual","Datos del inmueble: ");
             put("nuevo_cliente","Creacion de nuevo usuario");
-            put("nuevo_propietario","Crecaion de nuevo propietario");
+            put("nuevo_propietario","Creacion de nuevo propietario");
             put("nuevo_inmueble","Registro de inmueble a ofrecer");
+            put("disponible", "El inmueble estara disponible?");
         }
     };
 }

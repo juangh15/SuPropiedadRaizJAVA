@@ -85,19 +85,31 @@
     </c:if>
 
     <c:if test="${!empty propietario}">
-        <h3>Opciones de contrato:</h3>
+        <h3>Editar:</h3>
         <form method="GET" action="./editarContrato">
             <br />
             <input type="text" name="editar_contrato" hidden="true" value="editar contrato" class="form-control"/>
             <div class="form-group row" >
-                <input type="submit" class="btn btn-primary" value="Editar Contrato" name="accion" />
+                <input type="submit" class="btn btn-dark" value="Editar solo el inmueble" name="accion" />
             </div>
+
+        </form>
+        <form method="POST" action="./editarContrato">
+            <br />
+            <div class="form-group row" >
+                <input type="submit" class="btn btn-dark" value="Nuevo contrato de venta" name="boton" />
+            </div>
+            <br>
+            <div class="form-group row" >
+                <input type="submit" class="btn btn-dark" value="Nuevo contrato de arriendo" name="boton" />
+            </div>
+            
 
         </form>
     </c:if>
 
     <c:if test="${!empty logeado}">
-        <h3>¿Desea aplicar a este inmueble?</h3>
+        <h3>Â¿Desea aplicar a este inmueble?</h3>
         <form method="POST" action="./aplicarContrato">
             <br />
             <input type="text" name="aplicar_contrato" hidden="true" value="aplicar contrato" class="form-control"/>

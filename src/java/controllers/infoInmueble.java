@@ -46,6 +46,12 @@ public class infoInmueble extends HttpServlet {
                 }else{
                     contrato_inm=(Arriendo)i.getArriendo().getLast();
                 }
+                LinkedList<Contrato> lista_contrato_actual = new LinkedList<Contrato>();
+                LinkedList<Inmueble> lista_inmueble_actual = new LinkedList<Inmueble>();
+                lista_contrato_actual.addLast(contrato_inm);
+                lista_inmueble_actual.addLast(i);
+                session.setAttribute("lista_contrato_actual", lista_contrato_actual);
+                session.setAttribute("lista_inmueble_actual", lista_inmueble_actual);
                 request.setAttribute("contrato_actual", contrato_inm);
                 session.setAttribute("contrato_actual", contrato_inm);
                 request.setAttribute("propietario", p); 
