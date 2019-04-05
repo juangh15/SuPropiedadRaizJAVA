@@ -7,7 +7,6 @@ package controllers;
 
 import static controllers.MainServlet.setMessages;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.*;
+import util.ValidadorDeFormularios;
 
 /**
  *
@@ -42,6 +42,17 @@ public class nuevoPropietario extends HttpServlet {
         LinkedList<Propietario> propietarios = new LinkedList<Propietario>();
         if(null != session.getAttribute("Propietarios")){
             propietarios=(LinkedList<Propietario>) session.getAttribute("Propietarios");
+        }
+          if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("cedula"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo Cédula, debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+        }
+         if (!ValidadorDeFormularios.esCorreoValido(request.getParameter("correo"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo Correo, debe tener un formato válido");
+             view.forward(request, response);
         }
         int cc = Integer.parseInt(request.getParameter("cedula"));
         String nombre = request.getParameter("nombre"); 

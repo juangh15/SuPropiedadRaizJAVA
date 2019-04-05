@@ -7,7 +7,6 @@ package controllers;
 
 import static controllers.MainServlet.setMessages;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.*;
+import util.ValidadorDeFormularios;
 
 /**
  *
@@ -51,6 +51,13 @@ public class nuevoInmueble extends HttpServlet {
             int codigo = Contrato.codigo_nuevo + 1;
             Contrato.codigo_nuevo += 1;
             Date fecha = new Date();
+        if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("valor"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo "+request.getParameter("valor")+", debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+
             int valor = Integer.parseInt(request.getParameter("valor"));
             Inmueble actual = (Inmueble) session.getAttribute("inmueble_actual");
             boolean disponible = Boolean.parseBoolean(request.getParameter("disponible"));
