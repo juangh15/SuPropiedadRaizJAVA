@@ -78,6 +78,44 @@ public class nuevoInmueble extends HttpServlet {
             RequestDispatcher view = request.getRequestDispatcher("nuevoInmueble.jsp");
             view.forward(request, response);
         }
+        
+         if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("predial"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo "+request.getParameter("predial")+", debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+         if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("estrato"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo "+request.getParameter("estrato")+", debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+         if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("area"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo "+request.getParameter("area")+", debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+         if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("banos"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo "+request.getParameter("banos")+", debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+         if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("antiguedad"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo "+request.getParameter("antiguedad")+", debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+         if (!ValidadorDeFormularios.esDatoNumerico(request.getParameter("cuartos"))) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El campo "+request.getParameter("cuartos")+", debe de ser un número entero");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+          
         int predial = Integer.parseInt(request.getParameter("predial"));
         int estrato = Integer.parseInt(request.getParameter("estrato"));
         boolean vigilancia = Boolean.parseBoolean(request.getParameter("vigilancia"));
