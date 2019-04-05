@@ -7,7 +7,6 @@ package controllers;
 
 import static controllers.MainServlet.setMessages;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
