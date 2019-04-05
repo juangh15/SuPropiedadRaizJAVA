@@ -116,7 +116,7 @@ public class nuevoInmueble extends HttpServlet {
              view.forward(request, response);
          }
           
-        int predial = Integer.parseInt(request.getParameter("predial"));
+        Integer predial = Integer.parseInt(request.getParameter("predial"));
         int estrato = Integer.parseInt(request.getParameter("estrato"));
         boolean vigilancia = Boolean.parseBoolean(request.getParameter("vigilancia"));
         boolean ascensor = Boolean.parseBoolean(request.getParameter("ascensor"));
@@ -131,6 +131,14 @@ public class nuevoInmueble extends HttpServlet {
         } else {
             tipo = "enArriendo";
         }
+        
+        if (ValidadorDeFormularios.existeInmueble(inmuebles,predial)) {
+            RequestDispatcher view = request.getRequestDispatcher("camposNoValidos.jsp");
+            session.setAttribute("error", "El inmuble con el predia: "+predial.toString()+" ya existe");
+            session.setAttribute("urlAnterior",request.getRequestURI());
+             view.forward(request, response);
+         }
+        
         Inmueble inmu = new Inmueble(predial, estrato, vigilancia, ascensor, area, banos, cuartos, tipo, null, p, ciudad, antiguedad, true);
         p.addInmueble(inmu);
         inmuebles.add(inmu);

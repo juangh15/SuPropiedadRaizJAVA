@@ -5,8 +5,11 @@
  */
 package util;
 
+
+import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import models.Inmueble;
 
 /**
  *
@@ -26,6 +29,17 @@ public class ValidadorDeFormularios {
         Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 		      Matcher matcher = pattern.matcher(campo);
 		return matcher.matches(); 
+    }
+    public static Boolean existeInmueble(LinkedList<Inmueble> inmubles, Integer predial){
+        
+        Boolean existe = false;
+        for (Inmueble inmueble :inmubles ) {
+             if (predial.equals(inmueble.getPredial())) {
+                existe= true;
+            }
+                         
+        }
+    return existe;
     }
     
 }
